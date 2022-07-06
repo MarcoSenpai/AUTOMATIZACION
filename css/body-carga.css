@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+body{
+    background-image: url(../img/fiis.jpg);
+    background-size: 100% 100%; 
+}
+.carga{
+display: flex;
+justify-content: center;
+flex-direction: column;
+background: transparent;
+height: 500px;
+padding: 40px 80px;
+box-shadow: 5px 0 10px;
+}
+.container .carga h2{
+    
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+.linea{
+    margin-bottom:20px;
+}
