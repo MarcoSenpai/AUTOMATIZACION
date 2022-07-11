@@ -1,0 +1,70 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+body{
+    background-image: url(../img/fiis.jpg);
+    background-size: 100% 100%; 
+}
+.profesores{
+/*     display: flex;
+justify-content: center;
+flex-direction: column; */
+background: white;
+height: 700px;
+padding: 40px 80px;
+box-shadow: 5px 0 10px;
+}
+.container h2{
+    font-size:40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+.tablaProfesores{
+    overflow: auto;
+    height: 400px;
+}
+.tablaProfesores table thead {
+    background-color: #287bf0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.tablaProfesores table tbody td {
+    background-color: #FFF;
+  }
+
+  .check-ficha-no{
+    border: none;
+    background-image: url(../img/check-no.png);
+    width:31px;
+    height:28px;
+  } 
+  .check-ficha-si{
+    border: none;
+    background-image: url(../img/check-si.png);
+    width:31px;
+    height:28px;
+  } 
+  .check-ficha-si:hover{
+    border: none;
+    background-image: url(../img/check-si-select.png);
+  } 
+
+.download-si{
+    width:31px;
+    height:28px;
+    border: none;
+    background-image: url(../img/download-si.png);
+}
+.download-si:hover{
+    border: none;
+    background-image: url(../img/download-select.png);
+} 
+.download-no{
+    width:31px;
+    height:28px;
+    border: none;
+    background-image: url(../img/download-no.png);
+}
