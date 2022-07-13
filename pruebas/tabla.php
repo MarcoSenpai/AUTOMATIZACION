@@ -36,34 +36,152 @@
 </tr>
 <?php 
 $conn = new mysqli("localhost:3306", "root", "", "bd_pruebas");
-$sqlProfesor = $conn->query("SELECT ID_DOCENTE FROM DOCENTES WHERE APELLIDOS_NOMBRES='CASAZOLA CRUZ OSWALDO DANIEL'");
+$sqlProfesor = $conn->query("SELECT ID_DOCENTE FROM DOCENTES WHERE APELLIDOS_NOMBRES='VILCAPUMA MALPICA HERNAN MARIO '");
 $idp = $sqlProfesor->fetch_array();
 $idProfesor = $idp['ID_DOCENTE'];
-$sql = $conn->query("SELECT ID_CURSO, ID_TIPO FROM DETALLE_CURSOS WHERE ID_DOCENTE = '$idProfesor'");
-while ($data = $sql->fetch_array()) {
-echo '
-<tr>
-    <td> '.$data['ID_CURSO'].'</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-                                    ';
-                                    }
-                                
+$sqlcurso = $conn->query("SELECT ID_CURSO, ID_TIPO,SECCION_CURSO, HORA_INICIAL, HORA_FINAL, DIAS_CURSO FROM DETALLE_CURSOS WHERE ID_DOCENTE = '$idProfesor'");
+/* $temporal = array();
+$idc = $sqlcurso->fetch_array();
+array_push($temporal,$idc['ID_CURSO']);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>";
+$idc = $sqlcurso->fetch_array();
+array_push($temporal,$idc['ID_CURSO']);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>";
+$idc = $sqlcurso->fetch_array();
+array_push($temporal,$idc['ID_CURSO']);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>";
+$idc = $sqlcurso->fetch_array();
+array_push($temporal,$idc['ID_CURSO']);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>";
+$idc = $sqlcurso->fetch_array();
+array_push($temporal,$idc['ID_CURSO']);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>";
+$idc = $sqlcurso->fetch_array();
+array_push($temporal,$idc['ID_CURSO']);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>";
+$temporal = array_diff($temporal,$temporal);
+echo "<pre>";
+var_dump($temporal);
+echo "</pre>"; */
+$arraytemporal = array();
+$idc = $sqlcurso->fetch_array();
+$varTemporal = $idc["ID_CURSO"];
+do{
+    array_push ($arraytemporal,$idc["ID_CURSO"],$idc["ID_TIPO"],$idc["SECCION_CURSO"],$idc["HORA_INICIAL"],$idc["HORA_FINAL"],$idc["DIAS_CURSO"]);
+            $idc = $sqlcurso->fetch_array();
+            if($varTemporal == $idc["ID_CURSO"]){
+                array_push ($arraytemporal,$idc["ID_TIPO"],$idc["SECCION_CURSO"],$idc["HORA_INICIAL"],$idc["HORA_FINAL"],$idc["DIAS_CURSO"]);
+                $arrTemp2 = new ArrayObject($arraytemporal);
+                $copy = $arrTemp2 -> getArrayCopy();
+                echo "<pre>";
+                var_dump($copy);
+                echo "</pre>"; 
+            }else{
+                array_push ($arraytemporal,$idc["ID_CURSO"],$idc["ID_TIPO"],$idc["SECCION_CURSO"],$idc["HORA_INICIAL"],$idc["HORA_FINAL"],$idc["DIAS_CURSO"]);
+                $arrTemp2 = new ArrayObject($arraytemporal);
+                $copy = $arrTemp2 -> getArrayCopy();
+                echo "<pre>";
+                var_dump($copy);
+                echo "</pre>"; 
+            }
+            unset($arraytemporal);
+            $arraytemporal = array();
+        }while($idc = $sqlcurso->fetch_array());
+
+
+
+/* while ($idc = $sqlcurso->fetch_array()) {
+array_push($arreglo, $idc['ID_CURSO'], $idc['ID_TIPO']);
+array_push($arreglo, $idc['SECCION_CURSO']);
+array_push($arreglo, $idc['HORA_INICIAL']);
+array_push($arreglo, $idc['HORA_FINAL']);
+array_push($arreglo, $idc['DIAS_CURSO']);
+} */
+
+
+
+/* if($idc['ID_TIPO']=='T'){
+    echo '<tr>';
+    echo '
+        <td> '.$idc['ID_CURSO'].'</td>
+        <td>'.$idc['SECCION_CURSO'].'</td>
+        <td>ABC</td>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td>SISTEMAS</td>
+        <td>04/04/2022</td>
+        <td>CALLAO</td>
+        <td></td>
+        <td></td>';
+        if($idc['DIAS_CURSO']=='Lun'){
+            echo'
+            <td>'.$idc['HORA_INICIAL'].' a '.$idc['HORA_FINAL'].'</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            ';
+        } else if($idc['DIAS_CURSO']=='Mar'){
+            echo'
+            <td></td>
+            <td>'.$idc['HORA_INICIAL'].' a '.$idc['HORA_FINAL'].'</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            ';
+        }else if($idc['DIAS_CURSO']=='Mié'){
+            echo'
+            <td></td>
+            <td></td>
+            <td>'.$idc['HORA_INICIAL'].' a '.$idc['HORA_FINAL'].'</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            ';
+        }else if($idc['DIAS_CURSO']=='Jue'){
+            echo'
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>'.$idc['HORA_INICIAL'].' a '.$idc['HORA_FINAL'].'</td>
+            <td></td>
+            <td></td>
+            ';
+        }else if($idc['DIAS_CURSO']=='Vie'){
+            echo'
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>'.$idc['HORA_INICIAL'].' a '.$idc['HORA_FINAL'].'</td>
+            <td></td>
+            ';
+        }else if($idc['DIAS_CURSO']=='Sáb'){
+            echo'
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>'.$idc['HORA_INICIAL'].' a '.$idc['HORA_FINAL'].'</td>
+            ';
+        }
+    echo '</tr>';  */                   
 ?>
 <tr>
     <td colspan=9> Total de horas de labores lectivas</td>
@@ -76,7 +194,8 @@ echo '
     <td></td>
     <td></td>
 </tr>
-<tr>
+
+<!-- <tr>
     <td colspan=10>1.2 PREPARACION DE CLASES Y EVALUACION DE COMPETENCIAS(30% de hoiras laborales lectivas)</td>
     <td></td>
     <td></td>
@@ -382,7 +501,7 @@ echo '
     <td></td>
     <td></td>
     
-</tr>
+</tr> -->
 </table>
 
 </body>
