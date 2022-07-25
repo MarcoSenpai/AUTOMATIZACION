@@ -41,6 +41,10 @@ box-shadow: 5px 0 10px;
     width:31px;
     height:28px;
   } 
+  .check-ficha-no:hover{
+    border: none;
+    background-image: url(../img/check-no-select.png);
+  } 
   .check-ficha-si{
     border: none;
     background-image: url(../img/check-si.png);

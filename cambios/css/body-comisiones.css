@@ -1,0 +1,82 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    background-image: url(../img/fiis.jpg);
+    background-size: 100% 100%; 
+}
+.organizar{
+    margin: 0 10px;
+    width: 600px;
+    height: 600px;
+}
+.seleccionar{
+    display: flex;
+    flex-direction: column;
+}
+.comisiones{
+    width: 300px;
+    height: 300px;
+    margin-bottom: 10px;
+}
+.subcomisiones{
+    width: 300px;
+    height: 300px;
+    margin-top: 10px;
+
+}
+/* Estilos de Tablas */
+/* **************** Organizar **************** */
+
+.tablaorganizar{
+    overflow: auto;
+    height: 600px;
+}
+.tablaorganizar table thead {
+    background-color: #287bf0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.tablaorganizar table tbody td {
+    width: 255.5px;
+    height: 50px;
+    background-color: #FFF;
+}
+/* ******Estilos del contenido****** */
+.letra {
+    font-size: 13px;
+}
+/* **************** Comisiones **************** */
+.tablacomisiones{
+    overflow: auto;
+    height: 300px;
+}
+.tablacomisiones table thead {
+    background-color: #287bf0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.tablacomisiones table tbody td {
+    background-color: #FFF;
+}
+
+/* *************** Sub Comisiones ***************** */
+
+.tablaSubcomisiones{
+    overflow: auto;
+    height: 300px;
+}
+.tablaSubcomisiones table thead {
+    background-color: #287bf0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.tablaSubcomisiones table tbody td {
+    background-color: #FFF;
+}
