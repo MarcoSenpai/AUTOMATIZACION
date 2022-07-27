@@ -1,0 +1,173 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    background-image: url(../img/fiis.jpg);
+    background-size: 100% 100%; 
+}
+.organizar{
+    margin: 0 20px;
+    height: 600px;
+}
+.seleccionar{
+    display: flex;
+    flex-direction: column;
+}
+.comisiones{
+    width: 300px;
+    height: 250px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+.subcomisiones{
+    width: 300px;
+    height: 250px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+.cargos{
+    width: 300px;
+    height: 250px;
+    margin-top: 20px;
+    padding: 0;
+}
+.ocultar{
+    opacity: 0;
+}
+/* Estilos de Tablas */
+/* **************** Organizar **************** */
+
+.tablaorganizar{
+    overflow-y: auto;
+    height: 600px;
+    display: flex;
+}
+.tablaorganizar h3{
+    background-color: #287bf0;
+    font-size: 20px;
+    width: 350px;
+    padding: 10px 10px;
+    border: 1px solid black;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.tablaorganizar ul{
+    width: 350px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.tablaorganizar ul li{
+    background-color: #FFF;
+    list-style: none;
+    border: 1px solid black;
+    padding: 10px;
+}
+#sortableSubComision{
+    width: 350px;
+}
+/* ******Estilos del contenido****** */
+.letra {
+    font-size: 13px;
+}
+/* **************** Comisiones **************** */
+.tablacomisiones{
+    overflow: auto;
+    height: 250px;
+    background-color: #FFF;
+}
+.tablacomisiones h3 {
+    background-color: #287bf0;
+    font-size: 20px;
+    padding: 10px 10px;
+    position: sticky;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+.tablacomisiones ul{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.tablacomisiones ul li{
+    list-style: none;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+
+/* *************** Sub Comisiones ***************** */
+
+.tablaSubcomisiones{
+    overflow: auto;
+    height: 250px;
+    background-color: #FFF;
+}
+.tablaSubcomisiones h3 {
+    background-color: #287bf0;
+    font-size: 20px;
+    padding: 10px 10px;
+    position: sticky;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+.tablaSubcomisiones ul{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.tablaSubcomisiones ul li{
+    list-style: none;
+    border: 1px solid black;
+    padding: 10px;
+    
+}
+/********************** Cargos ***************************/
+.tablacargos{
+    overflow: auto;
+    height: 250px;
+    background-color: #FFF;
+}
+.tablacargos h3{
+    background-color: #287bf0;
+    font-size: 20px;
+    padding: 10px 10px;
+    position: sticky;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+.tablacargos ul{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.tablacargos ul li{
+    list-style: none;
+    border: 1px solid black;
+    padding: 10px;
+}
+/********************** Arrastrar y soltar ***************************/
+.formaDrag{
+    width: 350px;
+}
+.dragComision{
+    width: 350px;
+}
+.dragSubComision{
+    width: 350px;
+    height: 41.5px;
+    font-size: 10px;
+
+}
+.dragCargo{
+    width: 350px;
+}
