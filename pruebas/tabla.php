@@ -34,12 +34,35 @@
     <td>P</td>
     <td>L</td>
 </tr>
-<?php 
+<?php
+/* $arr1=[
+    'Cod'=>'',
+    'GH'=>'',
+    'Asignatura'=>'',
+    'T'=>'',
+    'P'=>'',
+    'L'=>'',
+    'Escuela'=>'',
+    'Fecha'=>'',
+    'Local'=>'',
+    'HorasSemana'=>'',
+    'HorasSemestre'=>'',
+    'Lunes'=>'',
+    'Martes'=>'',
+    'Miercoles'=>'',
+    'Jueves'=>'',
+    'Viernes'=>'',
+    'Sábado'=>'',
+]; 
+print_r ($arr1); */
+
 $conn = new mysqli("localhost:3306", "root", "", "bd_pruebas");
 $sqlProfesor = $conn->query("SELECT ID_DOCENTE FROM DOCENTES WHERE APELLIDOS_NOMBRES='VILCAPUMA MALPICA HERNAN MARIO '");
 $idp = $sqlProfesor->fetch_array();
 $idProfesor = $idp['ID_DOCENTE'];
 $sqlcurso = $conn->query("SELECT ID_CURSO, ID_TIPO,SECCION_CURSO, HORA_INICIAL, HORA_FINAL, DIAS_CURSO FROM DETALLE_CURSOS WHERE ID_DOCENTE = '$idProfesor'");
+
+
 /* $temporal = array();
 $idc = $sqlcurso->fetch_array();
 array_push($temporal,$idc['ID_CURSO']);
@@ -75,16 +98,34 @@ $temporal = array_diff($temporal,$temporal);
 echo "<pre>";
 var_dump($temporal);
 echo "</pre>"; */
+
+
 $arraytemporal = array();
 $idc = $sqlcurso->fetch_array();
 $varTemporal = $idc["ID_CURSO"];
+
+$nomCurso = $conn->query("SELECT NOM_CURSO FROM cursos WHERE ID_CURSO = '$varTemporal'");
+$arrCurso=$nomCurso->fetch_array();
+$nombreCurso=$arrCurso["NOM_CURSO"];
+print_r($nombreCurso);
+
+$datos["COD_ASIG"]="";
+$datos["GH"]="";
+$datos["TEORIA"]="";
+$datos["PRACTICA"]="";
+$datos["LABORATORIO"]="";
+
 do{
     array_push ($arraytemporal,$idc["ID_CURSO"],$idc["ID_TIPO"],$idc["SECCION_CURSO"],$idc["HORA_INICIAL"],$idc["HORA_FINAL"],$idc["DIAS_CURSO"]);
             $idc = $sqlcurso->fetch_array();
+            $datos["COD_ASIG"]=$idc["ID_CURSO"];
             if($varTemporal == $idc["ID_CURSO"]){
                 array_push ($arraytemporal,$idc["ID_TIPO"],$idc["SECCION_CURSO"],$idc["HORA_INICIAL"],$idc["HORA_FINAL"],$idc["DIAS_CURSO"]);
                 $arrTemp2 = new ArrayObject($arraytemporal);
                 $copy = $arrTemp2 -> getArrayCopy();
+                $datos["GH"]=$idc["SECCION_CURSO"];
+                $datos["HORAINI2"]=$idc["HORA_INICIAL"];
+                $datos["HORAFIN2"]=$idc["HORA_FINAL"];
                 echo "<pre>";
                 var_dump($copy);
                 echo "</pre>"; 
@@ -92,6 +133,8 @@ do{
                 array_push ($arraytemporal,$idc["ID_CURSO"],$idc["ID_TIPO"],$idc["SECCION_CURSO"],$idc["HORA_INICIAL"],$idc["HORA_FINAL"],$idc["DIAS_CURSO"]);
                 $arrTemp2 = new ArrayObject($arraytemporal);
                 $copy = $arrTemp2 -> getArrayCopy();
+                $datos["HORAINI1"]=$idc["HORA_INICIAL"];
+                $datos["HORAFIN1"]=$idc["HORA_FINAL"];
                 echo "<pre>";
                 var_dump($copy);
                 echo "</pre>"; 
@@ -100,6 +143,46 @@ do{
             $arraytemporal = array();
         }while($idc = $sqlcurso->fetch_array());
 
+        $contar=count($copy);
+        print_r($contar);
+        $i=0;
+        
+        do {
+            switch($copy[$i]){
+                case 'T':   $datos["TEORIA"]=$copy[$i]; break;
+                case 'P':   $datos["PRACTICA"]=$copy[$i]; break;
+                case 'L':   $datos["LABORATORIO"]=$copy[$i]; break;
+            } 
+            echo "<br>".$copy[$i];
+            $i=$i+1;
+        }
+        while($i<$contar); 
+
+        if ($datos["HORAINI1"]<$datos["HORAINI2"]){
+            $sumahoras=($datos["HORAINI1"]." - ".$datos["HORAFIN2"]);
+        }
+        else{
+            $sumahoras=($datos["HORAINI2"]." - ".$datos["HORAFIN1"]);
+
+        }
+
+        echo "<br>";
+echo "<br>";
+print_r($datos);
+
+$cod=$datos["COD_ASIG"];
+$gh=$datos["GH"];
+$teoria=$datos["TEORIA"];
+$practica=$datos["PRACTICA"];
+$laboratorio=$datos["LABORATORIO"];
+
+echo "<br>";
+echo "<br>";
+
+print_r($sumahoras);
+
+$sql_insertar="INSERT INTO ficha (COD_ASIG, GH, ASIGNATURA, TIPO_T, TIPO_P, TIPO_L,LUNES) VALUES ('$cod','$gh','$nombreCurso','$teoria','$practica','$laboratorio','$sumahoras')";
+$conn->query($sql_insertar); 
 
 
 /* while ($idc = $sqlcurso->fetch_array()) {
